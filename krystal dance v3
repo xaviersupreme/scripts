@@ -531,56 +531,35 @@ settings["Names to exclude from transparency"] = {
 }
 --// Settings end
 
--- Load external script
 loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingsimade/CurrentAngleV4/refs/heads/main/v4.lua"))()
-
-REANIMATION = false
+REANIMATION=false 
 end
-
-ReanimateVer = getgenv().Reanimate
-
+ReanimateVer=getgenv().Reanimate
 REANIMATE.MouseButton1Click:Connect(function()
-    if Place == 17574618959 or Place == 168556275 then
-        if REANIMATION then
-            return notify("ALREADY REANIMATING")
-        end
-
-        local player = game:GetService("Players").LocalPlayer
-        local char = player.Character
-
-        if char.Name == "GelatekReanimate" then
-            return notify("ALREADY REANIMATED CUH")
-        end
-
-        if game.Players.LocalPlayer.Name == "golfierer6" then
-            return notify("ALREADY REANIMATED CUH")
-        end
-
-        if ReanimateVer == "Gelatek" then
-            Run1.Position = UDim2.new(100, 0, 0.63, 0)
-
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Reanimate.lua"))()
-
-            game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync("-net")
-            REANIMATION = true
-
-        elseif ReanimateVer == "Current" then
-            Backup()
-            REANIMATION = true
-        end
-
-    else
-        Backup()
-        REANIMATION = true
-    end
-
-    wait(2)
-
-    local ws = workspace
-    if ws:FindFirstChild("GelatekReanimate") or ws:FindFirstChild(Character.Name .. "_Fake") then
-        REANIMATION = false
-        Run1.Position = UDim2.new(0, 0, 0.63, 0)
-    end
+if Place == 17574618959 or Place == 88308889239232 then
+if REANIMATION then return notify([[ALREADY REANIMATING]]) end
+if game:GetService("Players").LocalPlayer.Character.Name == "GelatekReanimate" then
+return notify("ALREADY REANIMATED CUH") end
+if game:GetService("Players").LocalPlayer.Character.Name == Character1.Name.."_Fake" then
+return notify("ALREADY REANIMATED CUH") end
+if ReanimateVer=="Gelatek" then
+Run1.Position = UDim2.new(100, 0, 0.629999971, 0)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Reanimate.lua"))()
+game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync("-net")
+REANIMATION=true
+elseif ReanimateVer=="Current" then
+Backup()
+REANIMATION=true
+end
+else 
+Backup()
+REANIMATION=true
+end 
+wait(2)
+if ws:FindFirstChild("GelatekReanimate") or ws:FindFirstChild(Character.Name.."_Fake") then
+REANIMATION=false
+Run1.Position = UDim2.new(0, 0, 0.629999971, 0)
+end
 end)
 
 function respawn()
@@ -3633,92 +3612,132 @@ SITTING=char.Humanoid:GetPropertyChangedSignal("Sit"):Connect(function()
 	end
 end)
 
+--// Services
 local RunService = game:GetService("RunService")
 local Player = game:GetService("Players").LocalPlayer
 local PlayerMouse = Player:GetMouse()
 local Camera = workspace.CurrentCamera
-local Character =char
+
+--// Character Setup
+local Character = char
 local Humanoid = Character:WaitForChild("Humanoid")
 local IsR6 = (Humanoid.RigType == Enum.HumanoidRigType.R6)
 local Head = Character:WaitForChild("Head")
 local Torso = if IsR6 then Character:WaitForChild("Torso") else Character:WaitForChild("UpperTorso")
 local Neck = if IsR6 then Torso:WaitForChild("Neck") else Head:WaitForChild("Neck")
 local Waist = if IsR6 then nil else Torso:WaitForChild("Waist")
+
+--// C0 Originals
 local NeckOriginC0 = Neck.C0
 local WaistOriginC0 = if Waist then Waist.C0 else nil
-Neck.MaxVelocity = 1/3
-local AllowedStates = {Enum.HumanoidStateType.Running, Enum.HumanoidStateType.Climbing, Enum.HumanoidStateType.Swimming, Enum.HumanoidStateType.Freefall, Enum.HumanoidStateType.Seated}
-local IsAllowedState = (table.find(AllowedStates, Humanoid:GetState()) ~= nil)
+Neck.MaxVelocity = 1 / 3
+
+--// Allowed States
+local AllowedStates = {
+	Enum.HumanoidStateType.Running,
+	Enum.HumanoidStateType.Climbing,
+	Enum.HumanoidStateType.Swimming,
+	Enum.HumanoidStateType.Freefall,
+	Enum.HumanoidStateType.Seated,
+}
 local find = table.find
 local atan = math.atan
 local atan2 = math.atan2
+
+local IsAllowedState = (find(AllowedStates, Humanoid:GetState()) ~= nil)
 Humanoid.StateChanged:Connect(function(_, new)
 	IsAllowedState = (find(AllowedStates, new) ~= nil)
 end)
+
+--// Animation and Sounds
 local oldC0N = Neck.C0
 local updatesPerSecond = 10
-local Character = char 
+
 local Root = char.HumanoidRootPart
-introsound = Instance.new("Sound",Root)
-introsound.SoundId = "rbxassetid://236146895"
-introsound.Volume = 1
-introsound:Play()
-bigfedora = Instance.new("Part",Character)
-bigfedora.Size = Vector3.new(2,2,2)
-bigfedora.CFrame = bigfedora.CFrame:inverse() * Root.CFrame * CFrame.new(math.random(-60,60),-.2,math.random(-60,60)) * CFrame.Angles(0,math.rad(math.random(-180,180)),0)
-bigfedora.CanCollide = false
-bigfedora.Anchored = true
-bigfedora.Name = "mbigf"
-mbigfedora = Instance.new("SpecialMesh", bigfedora)
-mbigfedora.MeshType = "FileMesh"
-mbigfedora.Scale = Vector3.new(5, 5, 5)
-mbigfedora.MeshId,mbigfedora.TextureId = 'http://www.roblox.com/asset/?id=1125478','http://www.roblox.com/asset/?id=1125479'
+local introSound = Instance.new("Sound", Root)
+introSound.SoundId = "rbxassetid://236146895"
+introSound.Volume = 1
+introSound:Play()
+
+--// Fedora Effect
+local bigFedora = Instance.new("Part", Character)
+bigFedora.Size = Vector3.new(2, 2, 2)
+bigFedora.CFrame = bigFedora.CFrame:Inverse() * Root.CFrame * CFrame.new(math.random(-60, 60), -0.2, math.random(-60, 60)) * CFrame.Angles(0, math.rad(math.random(-180, 180)), 0)
+bigFedora.CanCollide = false
+bigFedora.Anchored = true
+bigFedora.Name = "mbigf"
+
+local mBigFedora = Instance.new("SpecialMesh", bigFedora)
+mBigFedora.MeshType = "FileMesh"
+mBigFedora.Scale = Vector3.new(5, 5, 5)
+mBigFedora.MeshId = "http://www.roblox.com/asset/?id=1125478"
+mBigFedora.TextureId = "http://www.roblox.com/asset/?id=1125479"
+
+--// Fedora Animation Coroutine
 coroutine.resume(coroutine.create(function()
-for i = 1, 60 do
-	bigfedora.CFrame = bigfedora.CFrame:lerp(CFrame.new(Root.Position) * CFrame.new(0,-.1,0) * CFrame.Angles(math.rad(0),math.rad(0),math.rad(0)),.09)
-	task.wait(1/60)
-end
-wait(.25)
-for i = 1, 50 do
-	bigfedora.CFrame = bigfedora.CFrame:lerp(CFrame.new(char.Head.Position),.05)
-	task.wait(1/60)
-end
-zmc = 0
-for i = 1, 29 do
-	zmc = zmc + 2
-	mbigfedora.Scale = mbigfedora.Scale - Vector3.new(.25,.25,.25)
-	bigfedora.CFrame = bigfedora.CFrame * CFrame.Angles(math.rad(0),math.rad(zmc),0)
-	task.wait(1/60)
-end
-bigfedora:Remove()
+	for i = 1, 60 do
+		bigFedora.CFrame = bigFedora.CFrame:Lerp(
+			CFrame.new(Root.Position) * CFrame.new(0, -0.1, 0),
+			0.09
+		)
+		task.wait(1 / 60)
+	end
+
+	wait(0.25)
+
+	for i = 1, 50 do
+		bigFedora.CFrame = bigFedora.CFrame:Lerp(CFrame.new(char.Head.Position), 0.05)
+		task.wait(1 / 60)
+	end
+
+	local zmc = 0
+	for i = 1, 29 do
+		zmc += 2
+		mBigFedora.Scale -= Vector3.new(0.25, 0.25, 0.25)
+		bigFedora.CFrame *= CFrame.Angles(0, math.rad(zmc), 0)
+		task.wait(1 / 60)
+	end
+
+	bigFedora:Destroy()
 end))
-local nim= 0
+
+--// Death Event
 char.Humanoid.Died:Connect(function()
 	sound69.PlaybackSpeed = 0
-	sound69.Parent = nil 
+	sound69.Parent = nil
 	sound69.Volume = 0
 end)
+
+--// Head Movement Logic
 local hum = char.Humanoid
 local cf = CFrame.new
-local DIEDLOOP 
-local HEADLOOP
-repeat 
-	char.Humanoid:Move(Vector3.new(0,0,-1),true)
-	task.wait(1/60)
-	nim=nim+1
-until nim==5
-wait(.5)-- Add a small delay to make the head get animated, instead of being static
-local r = 255
-local g = 0
-local b = 0
+local nim = 0
+
+repeat
+	char.Humanoid:Move(Vector3.new(0, 0, -1), true)
+	task.wait(1 / 60)
+	nim += 1
+until nim == 5
+
+wait(0.5) -- Small delay for animation
+
+--// RGB Cycle
+local r, g, b = 255, 0, 0
 local stage = 1
-UPDATE=RunService.RenderStepped:Connect(function(deltaTime: number)
-sine = sine + change
+
+UPDATE = RunService.RenderStepped:Connect(function(deltaTime)
+	sine = sine + change
+
 	local function Alpha(n)
-		return math.clamp(n*deltaTime*60,0,1)
+		return math.clamp(n * deltaTime * 60, 0, 1)
 	end
-	hum.CameraOffset =  hum.CameraOffset:Lerp((hrp.CFrame*cf(0,1.5,0)):PointToObjectSpace(h.Position),Alpha(.15))
-	if IsAllowedState  and dancing == false then
+
+	hum.CameraOffset = hum.CameraOffset:Lerp(
+		(hrp.CFrame * cf(0, 1.5, 0)):PointToObjectSpace(h.Position),
+		Alpha(0.15)
+	)
+
+	if IsAllowedState and not dancing then
 		local HeadPosition = Head.Position
 		if Neck then
 			local MousePos = PlayerMouse.Hit.Position
@@ -3731,133 +3750,134 @@ sine = sine + change
 			if IsR6 then
 				NeckCFrame = CFrame.Angles(Pitch, 0, Yaw)
 			else
-			   	NeckCFrame = CFrame.Angles(-Pitch * 0.5, Yaw, -Roll * 0.5)				
-			   	local waistCFrame = CFrame.Angles(-Pitch * 0.5, Yaw * 0.5, 0)
-			   	Waist.C0 = Waist.C0:Lerp(WaistOriginC0 * waistCFrame, updatesPerSecond * deltaTime)
-			end			
+				NeckCFrame = CFrame.Angles(-Pitch * 0.5, Yaw, -Roll * 0.5)
+				local WaistCFrame = CFrame.Angles(-Pitch * 0.5, Yaw * 0.5, 0)
+				Waist.C0 = Waist.C0:Lerp(WaistOriginC0 * WaistCFrame, updatesPerSecond * deltaTime)
+			end
+
 			Neck.C0 = Neck.C0:Lerp(NeckOriginC0 * NeckCFrame, updatesPerSecond * deltaTime)
 		end
-	elseif dancing == true then 
+	elseif dancing then
 		Neck.C0 = oldC0N
 	end
-	if char.Humanoid.MoveDirection == Vector3.new(0,0,0) then 
-		walking = false 
-		idle = true 
-	else 
-		walking = true 
-		idle = false 
-	end
-if stage == 1 then
-g = g + 2.5
-if g >= 255 then
-g = 255
-stage = 2
-end
-elseif stage == 2 then
-r = r - 2.5
-if r <= 0 then
-r = 0
-stage = 3
-end
-elseif stage == 3 then
-b = b + 2.5
-if b >= 255 then
-b = 255
-stage = 4
-end
-elseif stage == 4 then
-g = g - 2.5
-if g <= 0 then
-g = 0
-stage = 5
-end
-elseif stage == 5 then
-r = r + 2.5
-if r >= 255 then
-r = 255
-stage = 6
-end
-elseif stage == 6 then
-b = b - 2.5
-if b <= 0 then
-b = 0
-stage = 1
-end
-end
-local rgb=Color3.fromRGB(r,g,b)
-techc.ImageColor3=rgb
-ned.TextColor3=rgb
-if dancing==true then
-if Occasions=="Halloween" then
-techc.Rotation = techc.Rotation + 0.1
-imgl2.Rotation = imgl2.Rotation - sound69.PlaybackLoudness/50
-imgl2.ImageColor3 = Color3.new(0,0,0)
-imgl2b.Rotation = imgl2b.Rotation + sound69.PlaybackLoudness/25
-imgl2b.ImageColor3 = Color3.new(220/255 + sound69.PlaybackLoudness/500,100/255 + sound69.PlaybackLoudness/750,0)
-else
-techc.Rotation = techc.Rotation + 0.1
-imgl2.Rotation = imgl2.Rotation - sound69.PlaybackLoudness/50
-imgl2.ImageColor3 = Color3.new(0.15 + sound69.PlaybackLoudness/2500,0,0.6 + sound69.PlaybackLoudness/1000)
-imgl2b.Rotation = imgl2b.Rotation + sound69.PlaybackLoudness/25
-imgl2b.ImageColor3 = Color3.new(0,0.3 + sound69.PlaybackLoudness/1500,0.6 + sound69.PlaybackLoudness/1000)
-end
-CurrentFrame.BackgroundColor3=Color3.fromRGB(50-sound69.PlaybackLoudness/25,50-sound69.PlaybackLoudness/25,50-sound69.PlaybackLoudness/25)
-CurrentFrame.BackgroundTransparency=.75-sound69.PlaybackLoudness/500
-else
-CurrentFrame.BackgroundColor3=Color3.fromRGB(25+Playsound.PlaybackLoudness/25,25+Playsound.PlaybackLoudness/25,25+Playsound.PlaybackLoudness/25)
-CurrentFrame.BackgroundTransparency=.25+Playsound.PlaybackLoudness/200
-if Occasions=="Halloween" then
-techc.Rotation = techc.Rotation + 0.1
-imgl2.Rotation = imgl2.Rotation - Playsound.PlaybackLoudness/50
-imgl2.ImageColor3 = Color3.new(0,0,0)
-imgl2b.Rotation = imgl2b.Rotation + Playsound.PlaybackLoudness/25
-imgl2b.ImageColor3 = Color3.new(220/255 + Playsound.PlaybackLoudness/500,100/255 + Playsound.PlaybackLoudness/750,0)
-else
-techc.Rotation = techc.Rotation + 0.1
-imgl2.Rotation = imgl2.Rotation - Playsound.PlaybackLoudness/50
-imgl2.ImageColor3 = Color3.new(0.15 + Playsound.PlaybackLoudness/2500,0,0.6 + Playsound.PlaybackLoudness/1000)
-imgl2b.Rotation = imgl2b.Rotation + Playsound.PlaybackLoudness/25
-imgl2b.ImageColor3 = Color3.new(0,0.3 + Playsound.PlaybackLoudness/1500,0.6 + Playsound.PlaybackLoudness/1000)
-end
-end
---textLabel1.Rotation=5*cos(sine/1)+math.random(-2.5,2.5)
-ned.Rotation = 0 - 2 * math.cos(sine / 24)
-ned.Position = UDim2.new(0.6,0 - 10 * math.cos(sine / 32),0.8,0 - 10 * math.cos(sine / 45))
-end)
-end
 
+	if char.Humanoid.MoveDirection == Vector3.new(0, 0, 0) then
+		walking, idle = false, true
+	else
+		walking, idle = true, false
+	end
+
+	--// RGB Transition
+	if stage == 1 then
+		g += 2.5
+		if g >= 255 then g = 255; stage = 2 end
+	elseif stage == 2 then
+		r -= 2.5
+		if r <= 0 then r = 0; stage = 3 end
+	elseif stage == 3 then
+		b += 2.5
+		if b >= 255 then b = 255; stage = 4 end
+	elseif stage == 4 then
+		g -= 2.5
+		if g <= 0 then g = 0; stage = 5 end
+	elseif stage == 5 then
+		r += 2.5
+		if r >= 255 then r = 255; stage = 6 end
+	elseif stage == 6 then
+		b -= 2.5
+		if b <= 0 then b = 0; stage = 1 end
+	end
+
+	local rgb = Color3.fromRGB(r, g, b)
+	techc.ImageColor3 = rgb
+	ned.TextColor3 = rgb
+
+	--// Dancing Effects
+	if dancing then
+		if Occasions == "Halloween" then
+			techc.Rotation += 0.1
+			imgl2.Rotation -= sound69.PlaybackLoudness / 50
+			imgl2.ImageColor3 = Color3.new(0, 0, 0)
+			imgl2b.Rotation += sound69.PlaybackLoudness / 25
+			imgl2b.ImageColor3 = Color3.new(
+				220 / 255 + sound69.PlaybackLoudness / 500,
+				100 / 255 + sound69.PlaybackLoudness / 750,
+				0
+			)
+		else
+			techc.Rotation += 0.1
+			imgl2.Rotation -= sound69.PlaybackLoudness / 50
+			imgl2.ImageColor3 = Color3.new(0.15 + sound69.PlaybackLoudness / 2500, 0, 0.6 + sound69.PlaybackLoudness / 1000)
+			imgl2b.Rotation += sound69.PlaybackLoudness / 25
+			imgl2b.ImageColor3 = Color3.new(0, 0.3 + sound69.PlaybackLoudness / 1500, 0.6 + sound69.PlaybackLoudness / 1000)
+		end
+
+		CurrentFrame.BackgroundColor3 = Color3.fromRGB(
+			50 - sound69.PlaybackLoudness / 25,
+			50 - sound69.PlaybackLoudness / 25,
+			50 - sound69.PlaybackLoudness / 25
+		)
+		CurrentFrame.BackgroundTransparency = 0.75 - sound69.PlaybackLoudness / 500
+	else
+		CurrentFrame.BackgroundColor3 = Color3.fromRGB(
+			25 + Playsound.PlaybackLoudness / 25,
+			25 + Playsound.PlaybackLoudness / 25,
+			25 + Playsound.PlaybackLoudness / 25
+		)
+		CurrentFrame.BackgroundTransparency = 0.25 + Playsound.PlaybackLoudness / 200
+
+		if Occasions == "Halloween" then
+			techc.Rotation += 0.1
+			imgl2.Rotation -= Playsound.PlaybackLoudness / 50
+			imgl2.ImageColor3 = Color3.new(0, 0, 0)
+			imgl2b.Rotation += Playsound.PlaybackLoudness / 25
+			imgl2b.ImageColor3 = Color3.new(
+				220 / 255 + Playsound.PlaybackLoudness / 500,
+				100 / 255 + Playsound.PlaybackLoudness / 750,
+				0
+			)
+		else
+			techc.Rotation += 0.1
+			imgl2.Rotation -= Playsound.PlaybackLoudness / 50
+			imgl2.ImageColor3 = Color3.new(0.15 + Playsound.PlaybackLoudness / 2500, 0, 0.6 + Playsound.PlaybackLoudness / 1000)
+			imgl2b.Rotation += Playsound.PlaybackLoudness / 25
+			imgl2b.ImageColor3 = Color3.new(0, 0.3 + Playsound.PlaybackLoudness / 1500, 0.6 + Playsound.PlaybackLoudness / 1000)
+		end
+	end
+
+	ned.Rotation = 0 - 2 * math.cos(sine / 24)
+	ned.Position = UDim2.new(0.6, 0 - 10 * math.cos(sine / 32), 0.8, 0 - 10 * math.cos(sine / 45))
+end)
+
+--// Run Button
 local RUNNING = false
 Run1.MouseButton1Click:Connect(function()
-if REANIMATION then return notify("Reanimating please wait") end
-if RUNNING then return notify("SCRIPT IS RUNNING!!") end
-if ReanimateVer=="Gelatek" then
-if ws:FindFirstChild("GelatekReanimate") then
-if ReanimateVer=="Gelatek" then
-if ws:FindFirstChild("GelatekReanimate").Humanoid.Health==0.03500000014901161 then
-MainScript()
-Run1.Position = UDim2.new(10, 0, 0.629999971, 0)
-RUNNING = true
-else
-notify("Wait for the health to be 0")
-end
-end
-else
-notif("Not Reanimated")
-end
-end
-if ReanimateVer=="Current" then
-if ws:FindFirstChild(Character1.Name.."_Fake") then
-if ReanimateVer=="Current" then
-if ws:FindFirstChild(Character1.Name.."_Fake") then
-Run1.Position = UDim2.new(10, 0, 0.629999971, 0)
-RUNNING = true
-MainScript()
-end
-end
-else
-notify("Not Reanimated")
-end
-end
+	local hui = gethui()
+	if REANIMATION then return notify("Reanimating please wait") end
+	if RUNNING then return notify("SCRIPT IS RUNNING!!") end
+
+	if ReanimateVer == "Gelatek" then
+		if ws:FindFirstChild("GelatekReanimate") then
+			if ws:FindFirstChild("GelatekReanimate").Humanoid.Health == 0.03500000014901161 then
+				MainScript()
+				Run1.Position = UDim2.new(10, 0, 0.629999971, 0)
+				RUNNING = true
+			else
+				notify("Wait for the health to be 0")
+			end
+		else
+			notif("Not Reanimated")
+		end
+
+	elseif ReanimateVer == "Current" then
+		if game:GetService("CoreGui").hui.ScreenGui.Frame.TextLabel.Text == "Would you like to run CurrentAngle V2 (semi-universal)?" then
+			Run1.Position = UDim2.new(10, 0, 0.629999971, 0)
+			RUNNING = true
+			MainScript()
+		else
+			notify("Not Reanimated")
+		end
+	end
 end)
 
 

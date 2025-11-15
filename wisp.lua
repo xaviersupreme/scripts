@@ -9,8 +9,8 @@ local words = {
 }
 
 
-local typeMin = 0.12
-local typeMax = 0.16
+local typeMin = 0.07
+local typeMax = 0.10
 local deleteMin = 0.05
 local deleteMax = 0.09
 

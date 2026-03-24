@@ -6,7 +6,7 @@ local discordLink = "https://discord.gg/MP9nZgEeQD"
 local labelText = "join the discord :3"
 local image1Id = "rbxassetid://18817097052"
 local image2Id = "rbxassetid://18817519330"
-local position = "center" -- "left", "center", "right"
+local position = "right" -- "left", "center", "right"
 local popupWidth = 200
 local popupHeight = 195
 

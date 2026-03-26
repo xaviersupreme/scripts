@@ -3691,3 +3691,5 @@ function Library:Watermark(cfg)
     return Watermark
 end 
 local Flags = Library.Flags
+
+return Library
